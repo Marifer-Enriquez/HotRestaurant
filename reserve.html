@@ -29,7 +29,7 @@
         <label for="name-input">Name</label>
         <input type="name" class="form-control" id="name-input" placeholder="Enter your name">
         <label for="phone-input">Phone Number</label>
-        <input type="phonenum" class="form-control" id="phone-input" placeholder="Enter your phone number">
+        <input type="number" class="form-control" id="phone-input" placeholder="Enter your phone number">
         <label for="name-input">Email</label>
         <input type="email-input" class="form-control" id="email-input" placeholder="Enter your email">
         <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone else.</small>
@@ -55,20 +55,24 @@
       // Question: What does this code do?
       $("#add-btn").on("click", function (event) {
         event.preventDefault();
+        var customerName=$("#name-input").val().trim();
+        var phoneNumber=($("#phone-input").val().trim());
+        var customerEmail=$("#email-input").val().trim();
+        var customerID= $("#uniqueID").val().trim();
+        
 
+        if(customerName!=''&&phoneNumber!=''&&customerEmail!=''&&customerID!=''){
         var newTable = {
-          customerName: $("#name-input").val().trim(),
-          phoneNumber: $("#phone-input").val().trim(),
-          customerEmail: $("#email-input").val().trim(),
-          customerID: $("#uniqueID").val().trim()
+          customerName: customerName,
+          phoneNumber: phoneNumber,
+          customerEmail: customerEmail,
+          customerID:customerID
         };
 
         $("#name-input").val('');
         $("#phone-input").val('');
         $("#email-input").val('');
         $("#uniqueID").val('');
-
-        // Question: What does this code do??
         $.post("/api/tables", newTable, function (data) {
           if (data) {
             alert("Congratulations, you have just reserved one of our five tables!");
@@ -77,6 +81,14 @@
             alert("Sorry, all of our tables are currently reserved. We have added you to the waiting list.");
           }
         });
+      }
+      else{
+        alert("Some of the fields were not filled. Please fill out the entire information to be able to make a reservation.")
+        $("#name-input").val('');
+        $("#phone-input").val('');
+        $("#email-input").val('');
+        $("#uniqueID").val('');
+      }
       });
     </script>
 
