@@ -22,7 +22,5 @@ module.exports = function(app) {
     app.post("/api/clear", function() {
         tableData = [];
         waitListData = [];
-
-        console.log(tableData);
     });
 };

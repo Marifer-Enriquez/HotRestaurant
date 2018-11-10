@@ -14,40 +14,70 @@
 
 <body>
 
-        <div class="container">
-                <div class="jumbotron">
-                    <h1><span class="fa fa-fire">   Hot Restaurant</span></h1>
-            
-                  <h3>Make your reservation! </h3>
-                  <hr>
-                  <a href="/tables"><button class="btn btn-lg btn-primary"><span class="fa fa-list-alt"></span> View Tables</button></a>
-                  <a href="/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span></button></a>
-                </div>
-    <form>
-        <h4>Table Reservation</h4>
-            <div class="form-group">
-              <label for="name-input">Name</label>
-              <input type="name" class="form-control" id="name-input" placeholder="Enter your name">
-              <label for="phone-input">Phone Number</label>
-              <input type="phonenum" class="form-control" id="phone-input" placeholder="Enter your phone number">
-              <label for="name-input">Email</label>
-              <input type="email-input" class="form-control" id="email-input" placeholder="Enter your email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Unique ID</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="id">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-          <hr><br>
-<footer>
-  <p>
-   |
-    <a href="/api/tables">API Table Link</a>
-    |
-    <a href="/api/waitlist">API Wait List</a>
+  <div class="container">
+    <div class="jumbotron">
+      <h1><span class="fa fa-fire"> Hot Restaurant</span></h1>
 
-</p>   
-</footer>
-       
+      <h3>Make your reservation! </h3>
+      <hr>
+      <a href="/tables"><button class="btn btn-lg btn-primary"><span class="fa fa-list-alt"></span> View Tables</button></a>
+      <a href="/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span></button></a>
+    </div>
+    <form>
+      <h4>Table Reservation</h4>
+      <div class="form-group">
+        <label for="name-input">Name</label>
+        <input type="name" class="form-control" id="name-input" placeholder="Enter your name">
+        <label for="phone-input">Phone Number</label>
+        <input type="phonenum" class="form-control" id="phone-input" placeholder="Enter your phone number">
+        <label for="name-input">Email</label>
+        <input type="email-input" class="form-control" id="email-input" placeholder="Enter your email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="uniqueID">Unique ID</label>
+        <input type="password" class="form-control" id="uniqueID" placeholder="id">
+      </div>
+      <button id='add-btn' type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <hr><br>
+    <footer>
+      <p>
+        |
+        <a href="/api/tables">API Table Link</a>
+        |
+        <a href="/api/waitlist">API Wait List</a>
+
+      </p>
+    </footer>
+
+    <script type="text/javascript">
+      // Question: What does this code do?
+      $("#add-btn").on("click", function (event) {
+        event.preventDefault();
+
+        var newTable = {
+          customerName: $("#name-input").val().trim(),
+          phoneNumber: $("#phone-input").val().trim(),
+          customerEmail: $("#email-input").val().trim(),
+          customerID: $("#uniqueID").val().trim()
+        };
+
+        $("#name-input").val('');
+        $("#phone-input").val('');
+        $("#email-input").val('');
+        $("#uniqueID").val('');
+
+        // Question: What does this code do??
+        $.post("/api/tables", newTable, function (data) {
+          if (data) {
+            alert("Congratulations, you have just reserved one of our five tables!");
+          }
+          else {
+            alert("Sorry, all of our tables are currently reserved. We have added you to the waiting list.");
+          }
+        });
+      });
+    </script>
+
+</html>
