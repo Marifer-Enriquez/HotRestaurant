@@ -46,7 +46,7 @@
     <hr><br>
     <footer>
       <p>
-        <a href="/api/clear">Clear Table</a>
+        <a href="/api/clear" id="clear-btn">Clear Table</a>
         |
         <a href="/api/tables">API Table Link</a>
         |
@@ -56,9 +56,9 @@
     </footer>
     <script type="text/javascript">
 
-       $.get("/api/tables", function(data) { 
-         
-        for(var i=0;i<data.length;i++){
+      $.get("/api/tables", function (data) {
+
+        for (var i = 0; i < data.length; i++) {
           console.log(data[i]);
           var listGroupItem = $("<li class='list-group-item mt-4'>");
 
@@ -66,29 +66,40 @@
           listGroupItem.append($("<h3>").text("Phone number: " + data[i].phoneNumber));
           listGroupItem.append($("<h3>").text("Email: " + data[i].customerEmail));
           listGroupItem.append($("<h3>").text("Unique ID: " + data[i].customerID));
-          
+
           $("#tableList").append(listGroupItem);
         }
-       });
+      });
 
-       $.get("/api/waitlist", function(data) { 
-         
-         for(var i=0;i<data.length;i++){
-           console.log(data[i]);
-           var listGroupItem = $("<li class='list-group-item mt-4'>");
- 
-           listGroupItem.append($("<h2>").text("Name: " + data[i].customerName));
-           listGroupItem.append($("<h3>").text("Phone number: " + data[i].phoneNumber));
-           listGroupItem.append($("<h3>").text("Email: " + data[i].customerEmail));
-           listGroupItem.append($("<h3>").text("Unique ID: " + data[i].customerID));
-           
-           $("#waitingList").append(listGroupItem);
-         }
-        });
+      $.get("/api/waitlist", function (data) {
 
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i]);
+          var listGroupItem = $("<li class='list-group-item mt-4'>");
 
+          listGroupItem.append($("<h2>").text("Name: " + data[i].customerName));
+          listGroupItem.append($("<h3>").text("Phone number: " + data[i].phoneNumber));
+          listGroupItem.append($("<h3>").text("Email: " + data[i].customerEmail));
+          listGroupItem.append($("<h3>").text("Unique ID: " + data[i].customerID));
 
+          $("#waitingList").append(listGroupItem);
+        }
+      });
 
+      $("#clear-btn").on("click", function (event) {
+        event.preventDefault();
+        $("#tableList").empty();
+        $("#waitingList").empty();
+
+        clearTable();
+        location.reload();
+      });
+
+      function clearTable() {
+        var currentURL = window.location.origin;
+        $.ajax({ url: currentURL + "/api/clear", method: "POST" });
+      }
+      
     </script>
 
-    </html>
+</html>
