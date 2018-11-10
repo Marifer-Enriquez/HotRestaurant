@@ -1,8 +1,8 @@
 var waitingArray = [
     {
         customerName: "Marifer",
-        customerEmail: "marifer@example.com",
         phoneNumber: "555-555-555",
+        customerEmail: "marifer@example.com",
         customerID: "mariferExampleID"
     }
 ];

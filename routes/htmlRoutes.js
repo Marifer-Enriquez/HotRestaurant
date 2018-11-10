@@ -9,6 +9,6 @@ module.exports = function (app) {
     })
     // DEFAULT ROUTE
     app.get("*", function (req, res) {
-        res.sendFile(path.join(__dirname, "../reserve.html"))
+        res.sendFile(path.join(__dirname, "../index.html"))
     })
 }
