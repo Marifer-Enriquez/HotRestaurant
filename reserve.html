@@ -16,13 +16,12 @@
 
         <div class="container">
                 <div class="jumbotron">
-                    <h1><span class="fa fa-fire">Hot Restaurant</span></h1>
+                    <h1><span class="fa fa-fire">   Hot Restaurant</span></h1>
             
-                  <h3>We only have 5 tables! Book your seat before they all are gone!
-                </h3>
+                  <h3>Make your reservation! </h3>
                   <hr>
                   <a href="/tables"><button class="btn btn-lg btn-primary"><span class="fa fa-list-alt"></span> View Tables</button></a>
-                  <a href="/reserve"><button class="btn btn-danger btn-lg"><span class="fa fa-credit-card"></span> HOME</button></a>
+                  <a href="/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span></button></a>
                 </div>
     <form>
         <h4>Table Reservation</h4>
@@ -31,7 +30,7 @@
               <input type="name" class="form-control" id="name-input" placeholder="Enter your name">
               <label for="phone-input">Phone Number</label>
               <input type="phonenum" class="form-control" id="phone-input" placeholder="Enter your phone number">
-              <label for="name-input">Name</label>
+              <label for="name-input">Email</label>
               <input type="email-input" class="form-control" id="email-input" placeholder="Enter your email">
               <small id="emailHelp" class="form-text text-muted">We'll never share your info with anyone else.</small>
             </div>
@@ -39,14 +38,12 @@
               <label for="exampleInputPassword1">Unique ID</label>
               <input type="password" class="form-control" id="exampleInputPassword1" placeholder="id">
             </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-
-            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
+          <hr><br>
 <footer>
   <p>
+   |
     <a href="/api/tables">API Table Link</a>
     |
     <a href="/api/waitlist">API Wait List</a>
